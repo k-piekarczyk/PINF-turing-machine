@@ -7,7 +7,7 @@
 #include <string.h>
 #include "tm_load.h"
 
-#define LINE_BUFFER 11
+#define LINE_BUFFER 12
 
 void parseLine(const char *src, TMRuleNode **head_ref) {
     char *bufor[LINE_BUFFER];
@@ -47,6 +47,27 @@ void parseLine(const char *src, TMRuleNode **head_ref) {
         exit(EXIT_FAILURE);
     }
 
+    printf("cs: %s, ns: %s, mv: %s, stop: %i\n", current_state, new_state, move, stop);
 
     appendRule(head_ref, current_state, new_state, move, stop);
+}
+
+TMRuleNode *loadRules(const char *file_name) {
+    FILE *fp;
+    char line[LINE_BUFFER];
+    TMRuleNode *rule_list = NULL;
+
+    fp = fopen(file_name, "r");
+    if (fp == NULL) {
+        printf("No file '%s'.\n", file_name);
+        exit(EXIT_FAILURE);
+    }
+
+    while (fgets(line, sizeof line, fp) != NULL) {
+        strtok(line, "\n");
+        parseLine(line, &rule_list);
+    }
+
+    fclose(fp);
+    return rule_list;
 }

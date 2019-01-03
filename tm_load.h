@@ -9,6 +9,6 @@
 
 void parseLine(const char *src, TMRuleNode **head_ref);
 
-TMRuleNode *loadRules(const char * file_name);
+TMRuleNode *loadRules(const char *file_name);
 
 #endif //TURING_MACHINE_TM_LOAD_H
