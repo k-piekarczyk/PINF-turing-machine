@@ -6,13 +6,13 @@
 #include <string.h>
 #include "tm_list.h"
 
-void appendRule(TMRuleNode **head_ref, char *currentState, char *newState, char *move, int stop) {
+void appendRule(TMRuleNode **head_ref, char *current_state, char *new_state, char *move, int stop) {
     TMRuleNode *new_rule = (TMRuleNode *) malloc(sizeof(TMRuleNode));
     TMRuleNode *current_node = *head_ref;
 
     new_rule->next = NULL;
-    new_rule->currentState = currentState;
-    new_rule->newState = newState;
+    new_rule->current_state = current_state;
+    new_rule->new_state = new_state;
     new_rule->move = move;
     new_rule->stop = stop;
 
@@ -31,6 +31,22 @@ TMRuleNode *findByState(TMRuleNode **head_ref, char *query) {
     TMRuleNode *current_node = *head_ref;
 
     while (current_node != NULL) {
-        if (strcmp())
+        if (strcmp(current_node->current_state, query) == 0) return current_node;
+        current_node = current_node->next;
     }
+
+    return NULL;
+}
+
+void destroyList(TMRuleNode **head_ref) {
+    TMRuleNode *current_node = *head_ref;
+    TMRuleNode *next;
+
+    while (current_node != NULL) {
+        next = current_node->next;
+        free(current_node);
+        current_node = next;
+    }
+
+    *head_ref = NULL;
 }

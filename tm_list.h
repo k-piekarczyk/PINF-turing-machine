@@ -9,16 +9,16 @@
 
 typedef struct _tm_rule_node {
     struct _tm_rule_node *next;
-    char *currentState;
-    char *newState;
+    char *current_state;
+    char *new_state;
     char *move;
     int stop;
 } TMRuleNode;
 
-void appendRule(TMRuleNode **, char *, char *, char *, int);
+void appendRule(TMRuleNode **head_ref, char *current_state, char *new_state, char *move, int stop);
 
-TMRuleNode *findByState(TMRuleNode **, char *);
+TMRuleNode *findByState(TMRuleNode **head_ref, char *query);
 
-void destroyList(TMRuleNode **);
+void destroyList(TMRuleNode **head_ref);
 
 #endif //TURING_MACHINE_TM_LIST_H
