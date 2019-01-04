@@ -4,9 +4,6 @@
 #ifndef TURING_MACHINE_TM_LIST_H
 #define TURING_MACHINE_TM_LIST_H
 
-#define TAPE 0
-#define STATE 1
-
 typedef struct _tm_rule_node {
     struct _tm_rule_node *next;
     char *current_state;
